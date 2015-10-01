@@ -1,0 +1,48 @@
+{
+  "name": "single-module-instance-webpack-plugin",
+  "version": "0.0.1",
+  "keywords": [
+    "webpack",
+    "bundle",
+    "module",
+    "load",
+    "chunk",
+    "runtime"
+  ],
+  "author": {
+    "name": "Savva Mikhalevski"
+  },
+  "description": "Force webpack runtime to load module once.",
+  "peerDependencies": {
+    "webpack": "^1.9.11"
+  },
+  "devDependencies": {
+    "webpack": "*",
+
+    "karma": "",
+    "karma-webpack": "",
+    "karma-jasmine": "",
+
+    "jasmine": ""
+  },
+  "files": [
+    "index.js",
+    "LICENSE"
+  ],
+  "homepage": "http://github.com/smikhalevski/single-module-instance-webpack-plugin",
+  "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/smikhalevski/single-module-instance-webpack-plugin.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/smikhalevski/single-module-instance-webpack-plugin/issues"
+  },
+  "maintainers": [
+    {
+      "name": "Savva Mikhalevski",
+      "email": "smikhalevski@gmail.com"
+    }
+  ]
+}
