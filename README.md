@@ -1,10 +1,11 @@
 # Single Module Instance Webpack Plugin
 
-Even after deduplication module can be initialized more than once which can cause unexpected
-consequences. Adding this plugin along with `DedupePlugin` would case `require` to serve only
-only instance of each requested module.
+At runtime webpacked module can be initialized more than once which is expected behavior on Node.
+This hurts a lot if you are used to RequireJS and thus may cause unexpected singleton collisions.
+Adding this plugin along with `DedupePlugin` would force `require` to serve only one instance of
+each requested module.
 
-Add `SingleModuleInstancePlugin` instance to `webpack.config.js`.
+Just add `SingleModuleInstancePlugin` instance to `webpack.config.js`:
 
 ``` js
 var SingleModuleInstancePlugin = require('single-module-instance-webpack-plugin');
