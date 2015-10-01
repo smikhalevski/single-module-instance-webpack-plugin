@@ -1,6 +1,6 @@
 {
   "name": "single-module-instance-webpack-plugin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "keywords": [
     "webpack",
     "bundle",
