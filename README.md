@@ -26,7 +26,7 @@ module.exports = {
 
 ## License
 
-MIT (http://www.opensource.org/licenses/mit-license.php)
+The code is available under [MIT licence](LICENSE.txt).
 
 [dedupe-plugin]: https://webpack.github.io/docs/list-of-plugins.html#dedupeplugin
 [webpack-1353]: https://github.com/webpack/webpack/pull/1353
