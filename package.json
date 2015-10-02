@@ -1,6 +1,6 @@
 {
   "name": "single-module-instance-webpack-plugin",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "keywords": [
     "webpack",
     "bundle",
@@ -18,16 +18,14 @@
   },
   "devDependencies": {
     "webpack": "*",
-
     "karma": "",
     "karma-webpack": "",
     "karma-jasmine": "",
-
     "jasmine": ""
   },
   "files": [
     "index.js",
-    "LICENSE"
+    "LICENSE.txt"
   ],
   "homepage": "http://github.com/smikhalevski/single-module-instance-webpack-plugin",
   "main": "./index.js",
