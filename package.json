@@ -17,7 +17,6 @@
     "webpack": "^1.9.11"
   },
   "devDependencies": {
-    "webpack": "*",
     "karma": "",
     "karma-webpack": "",
     "karma-jasmine": "",

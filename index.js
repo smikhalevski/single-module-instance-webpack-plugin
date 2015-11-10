@@ -4,17 +4,26 @@ function SingleModuleInstancePlugin() {}
 
 SingleModuleInstancePlugin.prototype.apply = function(compiler) {
   compiler.plugin('compilation', function(compilation) {
-    compilation.mainTemplate.plugin('require', function(source) {
-      return 'if (!installedModules[moduleId]) {'
-             + '  var sourceCode = String(modules[moduleId]);'
-             + '  for (var id in modules) {'
-             + '    if (id !== moduleId && installedModules[id] && String(modules[id]) === sourceCode) {'
-             + '      installedModules[moduleId] = installedModules[id];'
-             + '      break;'
-             + '    }'
-             + '  }'
-             + '}'
-             + source;
+    compilation.mainTemplate.plugin('require', function(originalSource) {
+      return this.asString([
+        '// SingleModuleInstancePlugin',
+        'if (!installedModules[moduleId]) {',
+        this.indent([
+          'var source = String(modules[moduleId]);',
+          'for (var id in modules) {',
+          this.indent([
+            'if (installedModules[id] && String(modules[id]) === source) {',
+            this.indent([
+              'installedModules[moduleId] = installedModules[id];',
+              'break;'
+            ]),
+            '}'
+          ]),
+          '}'
+        ]),
+        '}',
+        originalSource
+      ]);
     });
   });
 };
