@@ -12,7 +12,7 @@ SingleModuleInstancePlugin.prototype.apply = function(compiler) {
           'var source = String(modules[moduleId]);',
           'for (var id in modules) {',
           this.indent([
-            'if (installedModules[id] && String(modules[id]) === source) {',
+            'if (id !== moduleId && installedModules[id] && String(modules[id]) === source) {',
             this.indent([
               'installedModules[moduleId] = installedModules[id];',
               'break;'
