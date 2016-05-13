@@ -1,5 +1,7 @@
 # Single Module Instance Webpack Plugin
 
+[![npm version](https://badge.fury.io/js/single-module-instance-webpack-plugin.svg)](https://www.npmjs.com/package/single-module-instance-webpack-plugin)
+
 At runtime webpacked module [can be initialized more than once][webpack-1353] which is expected
 behavior for Node. Nevertheless this behavior hurts a lot if you are used to RequireJS and even
 may introduce unexpected singleton collisions.
