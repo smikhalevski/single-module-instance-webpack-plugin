@@ -26,23 +26,36 @@ function sanitizeString(text) {
    return text.substr(firstNewLine, lastReactHotLoader - firstNewLine);
 }
 
+function getModuleBody(id) {
+  if (smpCache.hasOwnProperty(id)) {
+    return smpCache[id];
+  }
+
+  const body = sanitizeString(String(modules[id]));
+  smpCache[id] = body;
+  return body;
+}
+
 SingleModuleInstancePlugin.prototype.apply = function(compiler) {
   compiler.plugin('compilation', function(compilation) {
     compilation.mainTemplate.plugin('require', function(originalSource) {
       return this.asString([
         '// SingleModuleInstancePlugin',
+        'const smpCache = this.smpCache = this.smpCache || {};',
+        'const smpMap = this.smpMap = this.smpMap || new Map();',
         `${sanitizeString}`,
+        `${getModuleBody}`,
         'if (!installedModules[moduleId]) {',
         this.indent([
-          'var source = String(modules[moduleId]);',
-          'for (var id in modules) {',
+          'const body = getModuleBody(moduleId);',
+          'if (smpMap.has(body)) {',
           this.indent([
-            'if (id !== moduleId && installedModules[id] && sanitizeString(String(modules[id])) === sanitizeString(source)) {',
-            this.indent([
-              'installedModules[moduleId] = installedModules[id];',
-              'break;'
-            ]),
-            '}'
+            'installedModules[moduleId] = installedModules[smpMap.get(body)];',
+          ]),
+          '}',
+          'else {',
+          this.indent([
+            'smpMap.set(body, moduleId)',
           ]),
           '}'
         ]),
