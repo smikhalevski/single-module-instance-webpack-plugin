@@ -13,17 +13,16 @@ function SingleModuleInstancePlugin() {}
 
  */
 function sanitizeString(text) {
-   var length = text.length;
-   if (length < 400) return text;
-   var firstReactHotLoader = text.substr(0,200).indexOf("REACT HOT LOADER");
-   if (firstReactHotLoader == -1) return text;
-
-   var lastReactHotLoader = text.substr(length - 800, 100).lastIndexOf("REACT HOT LOADER");
-   if (lastReactHotLoader == -1) return text;
-   lastReactHotLoader += length - 800;
-
-   var firstNewLine = text.indexOf("\n", firstReactHotLoader);
-   return text.substr(firstNewLine, lastReactHotLoader - firstNewLine);
+  /*
+   * Sanitize the source by ignoring webpack require calls:
+   * Say modules 1 & 2 are duplicates of module A
+   *     modules 3 & 4 are duplicates of module B
+   * If module A uses require("B")
+   *    module 1 might contain __webpack_require__(3)
+   *    module 2 might contain __webpack_require__(4)
+   * Stripping the module ids from webpack_require allows to dedupe module 1 and 2.
+   */
+   return text.replace(/__webpack_require__\(\d+\)/g,"");
 }
 
 function getModuleBody(id) {
